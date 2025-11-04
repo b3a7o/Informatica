@@ -1,58 +1,101 @@
-create database university;
+CREATE DATABASE university;
+USE university;
 
-use university;
-
-drop DATABASE university
-
-create table degree_courses(
-    degree_course varchar(127) not null primary KEY,
-    degree_type varchar(255),
+DROP DATABASE IF EXISTS university;
+CREATE DATABASE university;
+USE university;
+ 
+CREATE TABLE degree_courses(
+    degree_course VARCHAR(127) NOT NULL PRIMARY KEY,
+    degree_type VARCHAR(255),
     faculty VARCHAR(255)
 );
 
-create table professors(
-    code int not null PRIMARY KEY,
-    name varchar(127),
+CREATE TABLE professors(
+    code INT NOT NULL PRIMARY KEY,
+    name VARCHAR(127),
     department VARCHAR(127)
 );
 
-create table courses(
-    course_code int not null PRIMARY KEY,
+CREATE TABLE courses(
+    course_code INT NOT NULL PRIMARY KEY,
     course_name VARCHAR(127),
-    professor int,
-    Foreign Key (professor) REFERENCES professors(code)
+    professor INT,
+    FOREIGN KEY (professor) REFERENCES professors(code)
 );
 
-create table students(
-    mat_number int not null PRIMARY KEY,
-    name varchar(127),
-    degree_course VARCHAR(127) not null,
-    year int,
-    Foreign Key (degree_course) REFERENCES degree_courses(degree_course)
+CREATE TABLE students(
+    mat_number INT NOT NULL PRIMARY KEY,
+    name VARCHAR(127),
+    degree_course VARCHAR(127) NOT NULL,
+    year INT,
+    FOREIGN KEY (degree_course) REFERENCES degree_courses(degree_course)
 );
 
-
-create table frequency(
-    mat_number int not NULL,
-    course_code int not null,
-    Foreign Key (mat_number) REFERENCES students(mat_number),
-    Foreign Key (course_code) REFERENCES courses(course_code),
-    constraint pk_fequency PRIMARY KEY (mat_number,course_code)
+CREATE TABLE frequency(
+    mat_number INT NOT NULL,
+    course_code INT NOT NULL,
+    FOREIGN KEY (mat_number) REFERENCES students(mat_number),
+    FOREIGN KEY (course_code) REFERENCES courses(course_code),
+    CONSTRAINT pk_frequency PRIMARY KEY (mat_number, course_code)
 );
 
+INSERT INTO degree_courses VALUES
+('Big Data', 'M', 'Ingegneria'),
+('Data Science', 'M', 'Ingegneria'),
+('Lettere Moderne', 'L', 'Lettere'),
+('Filosofia', 'L', 'Filosofia'),
+('Informatica', 'L', 'Scienze');
 
-insert into degree_courses() VALUES("big data", "M", "ingegneria");
-insert into degree_courses() VALUES("data science", "M", "ingegneria");
-insert into professors() VALUES(001, "Giorgio", "informatica");
-insert into professors() VALUES(002, "Francesco", "ingegneria");
-insert into courses() values(001, "ux", 001);
-insert into courses() values(002, "machine learning", 002);
-insert into students() values(00000001, "Luca", "big data", 2005);
-insert into students() values(00000002, "Matteo", "data science", 2003);
-insert into frequency() values(00000001, 001);
-insert into frequency() values(00000002, 002);
+INSERT INTO professors VALUES
+(1, 'Giorgio', 'Informatica'),
+(2, 'Francesco', 'Ingegneria'),
+(3, 'Felice Leoni', 'Informatica'),
+(4, 'Anna Bianchi', 'Lettere'),
+(5, 'Marco Rossi', 'Informatica'),
+(6, 'Luca Leoni', 'Informatica');
+
+INSERT INTO courses VALUES
+(1, 'UX', 1),
+(2, 'Machine Learning', 2),
+(3, 'SBC', 3),
+(4, 'Basi di Dati e Sistemi Informativi', 3),
+(5, 'Informatica Generale', 5),
+(6, 'Letteratura Italiana', 4),
+(7, 'Filosofia Antica', 4),
+(8, 'AI Foundations', 6);
 
 
+INSERT INTO students VALUES
+(1001, 'Luca', 'Big Data', 2005),
+(1002, 'Matteo', 'Data Science', 2003),
+(1003, 'Chiara', 'Informatica', 2004),
+(1004, 'Francesca', 'Informatica', 2002),
+(1005, 'Giulia', 'Lettere Moderne', 2000),
+(1006, 'Davide', 'Filosofia', 2001),
+(1007, 'Sara', 'Filosofia', 2003),
+(1008, 'Marco', 'Big Data', 2005),
+(1009, 'Elena', 'Informatica', 2002);
+
+
+INSERT INTO frequency VALUES
+(1001, 1),
+(1002, 2),
+(1003, 3),
+(1004, 4),
+(1005, 6),
+(1006, 7),
+(1007, 7),
+(1003, 5),
+(1004, 8),
+(1008, 3),
+(1009, 3);
+
+
+INSERT INTO students VALUES (1010, 'Paolo', 'Data Science', 2001);
+
+INSERT INTO courses VALUES (9, 'Reti di Calcolatori', 5);
+INSERT INTO courses VALUES (10, 'Algoritmi Avanzati', 5);
 
 
 /*1. Il nome e l’anno di nascita degli studenti iscritti a SBC, in ordine rispetto al
@@ -126,18 +169,19 @@ where dc.faculty like "Lettere" or dc.faculty like "Filosofia"
 
 /*8. Matricola e nome degli studenti che non frequentano nessun corso
 */
-select s.mat_number, s.name from students s 
-join degree_courses dc on s.degree_course = dc.degree_course
-join frequency f on f.mat_number = s.mat_number
-join courses c on c.course_code = f.course_code
-having count(c.course_code) = 0;
+select s.mat_number, s.name
+from students s
+left join frequency f on s.mat_number = f.mat_number
+where f.course_code is null;
+
 
 
 /*9. Il Codice ed il Nome dei docenti dei Corsi che non sono frequentati da nessuno
 studente
 */
-select p.code, p.name from professors p 
+select distinct p.code, p.name
+from professors p
 join courses c on c.professor = p.code
-join frequency f on f.course_code = c.course_code
-join students s on s.mat_number = f.mat_number
-having count(c.course_code) = 0
+left join frequency f on f.course_code = c.course_code
+where f.mat_number is null;
+
