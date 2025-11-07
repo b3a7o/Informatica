@@ -184,4 +184,3 @@ from professors p
 join courses c on c.professor = p.code
 left join frequency f on f.course_code = c.course_code
 where f.mat_number is null;
-
