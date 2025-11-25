@@ -11,6 +11,14 @@
         Name: <input type="text", name="name" required><br>
         Surname: <input type="text" name="surname" required><br>
         Email: <input type="text", name="email" required><br>
+        
+        <input list="categories">
+        <datalist id = "categories">
+            <option value="home products"></option>
+            <option value="food"></option>
+            <option value="sports articles"></option>
+            <option value="books"></option>
+        </datalist>
         <input type="submit">
     </form>
 </body>
