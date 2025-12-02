@@ -23,3 +23,6 @@ create table orders(
     Foreign Key (product_id) REFERENCES products(product_id),
     Foreign Key (customer_id) REFERENCES customers(customer_id)
 )
+
+
+select * from customers
