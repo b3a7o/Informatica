@@ -5,9 +5,8 @@ require 'config.php';
 $dns = "mysql:host=$host;dbname=$db;chartset=UTF8";
 
 try{
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-
-    $conn = new PDO($dns, $user, $password, $options);
+    $conn = new PDO($dns, $user, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if ($conn) {
         echo "Connected to the $db database successfully!";

@@ -11,10 +11,5 @@
         Email: <input type="text", name="email" required><br>
         <input type="submit">
     </form>
-
 </body>
 </html>
-    
-    
-    
-    

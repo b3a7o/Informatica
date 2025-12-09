@@ -12,6 +12,7 @@ create table customers(
 create table products(
     product_id int not null AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) not null,
+    price int not null,
     is_available BOOLEAN 
 )
 
@@ -26,3 +27,6 @@ create table orders(
 
 
 select * from customers
+
+
+insert into products(name, price, is_available) VALUES("yeezy", 200, true)
