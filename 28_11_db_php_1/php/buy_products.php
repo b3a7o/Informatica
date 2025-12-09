@@ -1,6 +1,3 @@
-Implementare una pagina di acquisto dei prodotti, nella quale il cliente indica i propri dati,  
-sceglie il prodotto e indica la quantità. La pagina PHP dovrà calcolare  e mostrare il costo dell'acquisto.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +17,34 @@ sceglie il prodotto e indica la quantità. La pagina PHP dovrà calcolare  e mos
         require 'check_presence.php';
 
         if(is_registered($name, $email)){
+            /*show the product list below, use the get_products class, method products() return and array with every row*/
+            function build_table($array){
+                // start table
+                $html = '<table>';
+                // header row
+                $html .= '<tr>';
+                foreach($array[0] as $key=>$value){
+                        $html .= '<th>' . htmlspecialchars($key) . '</th>';
+                    }
+                $html .= '</tr>';
+
+                // data rows
+                foreach( $array as $key=>$value){
+                    $html .= '<tr>';
+                    foreach($value as $key2=>$value2){
+                        $html .= '<td>' . htmlspecialchars($value2) . '</td>';
+                    }
+                    $html .= '</tr>';
+                }
+
+                // finish table and return it
+
+                $html .= '</table>';
+                return $html;
+            }
+            require_once "get_products";
+            $products = products();
+            echo build_table($products);
             
         }else{
             ?>
