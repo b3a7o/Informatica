@@ -29,7 +29,7 @@ create table orders(
 select * from customers
 
 
-insert into products(name, price, is_available) VALUES("yeezy", 200, true)
+insert into products(name, price, is_available) VALUES("yeezy", 200, true);
 
 
 select * from customers

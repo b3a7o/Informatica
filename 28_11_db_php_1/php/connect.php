@@ -8,8 +8,8 @@ try{
     $conn = new PDO($dns, $user, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($conn) {
-        echo "Connected to the $db database successfully!";
+    if (!$conn) {
+        echo "error in the db connection!";
     }
 }catch(PDOException $e){
     echo $e->getMessage();

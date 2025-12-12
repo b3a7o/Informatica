@@ -13,6 +13,7 @@
         foreach( $array as $key=>$value){
             $html .= '<tr>';
             foreach($value as $key2=>$value2){
+                $html .= '<td>'. <button type="button"></button> . '</td>';
                 $html .= '<td>' . htmlspecialchars($value2) . '</td>';
             }
             $html .= '</tr>';
