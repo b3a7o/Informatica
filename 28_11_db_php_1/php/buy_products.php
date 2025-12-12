@@ -45,7 +45,7 @@
         if(is_registered($name, $email)){
             /*show the product list below, use the get_products class, method products() return and array with every row*/
             
-            require_once "get_products";
+            require_once "get_products.php";
             $products = products();
             echo build_table($products);
             
