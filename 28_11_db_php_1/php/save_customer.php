@@ -9,7 +9,7 @@
     <form action="insert_customer.php", method="POST"> 
         Name: <input type="text", name="name" required><br>
         Email: <input type="text", name="email" required><br>
-        <input type="submit">
+        <input type="submit" value="Register">
     </form>
 </body>
 </html>

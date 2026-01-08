@@ -1,7 +1,7 @@
 <?php
 function products(){
     try {
-        $pdo = require 'connect.php';
+        $conn = require 'connect.php';
         $sql = 'SELECT DISTINCT name FROM products WHERE is_available = 1';
         $stmt = $conn->prepare($sql);
         $stmt->execute();

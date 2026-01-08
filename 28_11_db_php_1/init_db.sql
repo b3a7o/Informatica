@@ -33,3 +33,5 @@ insert into products(name, price, is_available) VALUES("yeezy", 200, true);
 
 
 select * from customers
+
+select * from products

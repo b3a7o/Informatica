@@ -1,18 +1,17 @@
 <?php
 
-require 'config.php';
+require __DIR__ . '/config.php';
 
-$dns = "mysql:host=$host;dbname=$db;chartset=UTF8";
+$dns = "mysql:host=$host;port=$port;dbname=$db;charset=UTF8";
+$conn = null;
 
 try{
     $conn = new PDO($dns, $user, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    if (!$conn) {
-        echo "error in the db connection!";
-    }
 }catch(PDOException $e){
-    echo $e->getMessage();
+    die("Errore di connessione: " . $e->getMessage());
 }
+
+return $conn;
 ?>
 

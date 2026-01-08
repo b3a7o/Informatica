@@ -1,7 +1,7 @@
 <?php
     function is_registered($name, $email){
             if($_POST && isset($_POST['name'], $_POST['email'])){ 
-                $pdo = require_once 'connect.php';
+                $conn = require __DIR__ . '/connect.php';
                 $name = $_POST['name'];
                 $email = $_POST['email'];
                 $sql = "SELECT name, email FROM customers WHERE name = :name AND email = :email";
