@@ -2,7 +2,7 @@
 
 require __DIR__ . '/config.php';
 
-$dns = "mysql:host=$host;port=$port;dbname=$db;charset=UTF8";
+$dns = "mysql:host=$host;dbname=$db;charset=UTF8";
 $conn = null;
 
 try{
