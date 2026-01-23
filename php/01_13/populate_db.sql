@@ -2,19 +2,19 @@ use tutti_in_forma
 
 --COACHES
 insert into coaches() VALUES
-("001", 2021-09-11, "Lorenzo", "Rossi")
+("001", "eee", 2021-09-11, "Lorenzo", "Rossi");
 
 insert into coaches() VALUES
-("002", 2020-06-11, "Luca", "Verdi")
+("002","aaa", 2020-06-11, "Luca", "Verdi")
 
 insert into coaches() VALUES
-("003", 2022-02-11, "Roberto", "De Marchi")
+("003","bbb", 2022-02-11, "Roberto", "De Marchi")
 
 insert into coaches() VALUES
-("004", 2021-03-11, "Aurora", "Deste")
+("004","ccc", 2021-03-11, "Aurora", "Deste")
 
 insert into coaches() VALUES
-("005", 2022-12-11, "Anna", "Aggio")
+("005","ddd", 2022-12-11, "Anna", "Aggio")
 
 
 --STRUCTURES
@@ -57,10 +57,10 @@ insert into courses() VALUES
 
 
 insert into courses() VALUES
-("bsk01", "Basket<10", "basket bambini", 120, "martedi", "16:00:00", "17:00:00", 3, "stcdn89")
+("bsk01", "Basket<10", "basket bambini", 120, "martedi", "16:00:00", "17:00:00", 3, "stcdnl89")
 
 insert into courses() VALUES
-("bsk02", "Basket10-14", "basket ragazzi", 150, "martedi", "17:30:00", "18:30:00", 3, "stcdn89")
+("bsk02", "Basket10-14", "basket ragazzi", 150, "martedi", "17:30:00", "18:30:00", 3, "stcdnl89")
 
 insert into courses() VALUES
 ("bsk03", "Basket>14", "basket amatori", 200, "giovedi", "18:00:00", "19:45:00", 4, "stcfrn80")

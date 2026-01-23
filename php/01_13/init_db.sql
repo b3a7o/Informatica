@@ -10,7 +10,9 @@ CREATE TABLE members (
     birth_date DATE,
     occupation VARCHAR(50),
     type ENUM('athlete','regular','honorary') NOT NULL
-);
+    username varchar(63),
+    password char(72)
+);  
 
 
 -- STRUCTURES
@@ -36,7 +38,7 @@ CREATE TABLE supervisors (
 
 -- COURSES
 CREATE TABLE courses (
-    course_code INT PRIMARY KEY,
+    course_code varchar(50) not null PRIMARY KEY,
     name VARCHAR(50),
     description VARCHAR(255),
     price DECIMAL(6,2),
@@ -79,7 +81,7 @@ CREATE TABLE honorary (
 -- COURSE ATTENDANCE
 CREATE TABLE course_attendance (
     badge_number INT,
-    course_code INT,
+    course_code VARCHAR(50),
     payment_date DATE,
     PRIMARY KEY (badge_number, course_code),
     FOREIGN KEY (badge_number) REFERENCES members(badge_number),
@@ -103,7 +105,7 @@ CREATE TABLE teams (
     name VARCHAR(50),
     category VARCHAR(30),
     athlete_number INT,
-    course_code INT,
+    course_code varchar(50),
     coach_id INT,
     FOREIGN KEY (course_code) REFERENCES courses(course_code),
     FOREIGN KEY (coach_id) REFERENCES coaches(id)
@@ -119,3 +121,4 @@ CREATE TABLE athlete_teams (
     FOREIGN KEY (badge_number) REFERENCES athletes(badge_number),
     FOREIGN KEY (team_id) REFERENCES teams(id)
 );
+
