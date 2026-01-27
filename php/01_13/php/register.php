@@ -1,28 +1,5 @@
 <?php
-        
-        if($_SERVER["REQUEST_METHOD"] == "POST"&& $_POST && isset($_POST['username'], $_POST['password'])){ 
-            $conn = require __DIR__ . '/connect.php';
-            
-            $name = $_POST['username'];
-            $email = $_POST['password'];
-
-            $sql = "INSERT INTO members(username, password) VALUES (:username, :password)";
-            $statement = $conn->prepare($sql);
-            $statement->bindParam(":username", $username);
-            $statement->bindParam(":password", $password);
-            
-            if($statement->execute()){
-                header("Location: index.php");
-                exit();
-            }
-        }
-    ?>
-
-
-
-
-<?php
-require_once('connect.php');
+require_once(__DIR__.'/connect.php');
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'] ?? '';
@@ -38,12 +15,11 @@ if (isset($_POST['register'])) {
     $pwdLenght = mb_strlen($password);
     
     if (empty($username) || empty($password)) {
-        $msg = 'Compila tutti i campi %s';
+        $msg = 'fill all the required %s';
     } elseif (false === $isUsernameValid) {
         $msg = 'invalid Username only alphanumeric characters and underscores';
     } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-        $msg = 'Lunghezza minima password 8 caratteri.
-                Lunghezza massima 20 caratteri';
+        $msg = 'min 8 character.';
     } else {
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -53,7 +29,7 @@ if (isset($_POST['register'])) {
             WHERE username = :username
         ";
         
-        $check = $pdo->prepare($query);
+        $check = $conn->prepare($query);
         $check->bindParam(':username', $username, PDO::PARAM_STR);
         $check->execute();
         
@@ -67,18 +43,19 @@ if (isset($_POST['register'])) {
                 VALUES (0, :username, :password)
             ";
         
-            $check = $pdo->prepare($query);
+            $check = $conn->prepare($query);
             $check->bindParam(':username', $username, PDO::PARAM_STR);
             $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
             $check->execute();
             
             if ($check->rowCount() > 0) {
-                $msg = 'Registrazione eseguita con successo';
+                $msg = 'resitered succesfully';
             } else {
-                $msg = 'Problemi con l\'inserimento dei dati %s';
+                $msg = 'error ocured with the datas';
             }
         }
     }
     
-    printf($msg, '<a href="../register.html">torna indietro</a>');
+    print($msg);
+    echo("<form action='../login.html'><button type='submit'>login</button></form>");
 }

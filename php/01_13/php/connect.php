@@ -1,12 +1,12 @@
+-- Active: 1764659229914@@127.0.0.1@3306@tutti_in_forma
 <?php 
     $host = "127.0.0.1";
-    $db = "esPDO";
+    $db = "tutti_in_forma";
     $user = "root";
     $password = "";
     //$port = 3306;
 
     $dns = "mysql:host=$host;dbname=$db;charset=UTF8";
-    $conn = null;
 
     try{
         $conn = new PDO($dns, $user, $password);

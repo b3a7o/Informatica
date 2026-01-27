@@ -122,3 +122,10 @@ CREATE TABLE athlete_teams (
     FOREIGN KEY (team_id) REFERENCES teams(id)
 );
 
+-- Users
+create table users(
+    id int AUTO_INCREMENT not null primary key,
+    username varchar(20) not null,
+    password varchar(255) not null,
+    UNIQUE KEY username (username)
+)
