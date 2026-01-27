@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__.'/connect.php');
+$red = false;
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'] ?? '';
@@ -16,10 +17,13 @@ if (isset($_POST['register'])) {
     
     if (empty($username) || empty($password)) {
         $msg = 'fill all the required %s';
+        $red = true;
     } elseif (false === $isUsernameValid) {
         $msg = 'invalid Username only alphanumeric characters and underscores';
+        $red = true;
     } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
         $msg = 'min 8 character.';
+        $red = true;
     } else {
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -37,6 +41,8 @@ if (isset($_POST['register'])) {
         
         if (count($user) > 0) {
             $msg = 'Username già in uso %s';
+            $red = true;
+            
         } else {
             $query = "
                 INSERT INTO users
@@ -52,10 +58,13 @@ if (isset($_POST['register'])) {
                 $msg = 'resitered succesfully';
             } else {
                 $msg = 'error ocured with the datas';
+                $red = true;
             }
         }
     }
-    
     print($msg);
+    if($red){
+        header(__DIR__."register.php");
+    }   
     echo("<form action='../login.html'><button type='submit'>login</button></form>");
 }
