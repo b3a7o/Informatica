@@ -27,7 +27,7 @@
 
         <h3>type</h3>
         <select name="type" id="type_selector" onchange="toggleFields()" required>
-            <option value="">-- Seleziona Tipo --</option>
+            <option value="selection">-- select type --</option>
             <option value="athlete">Atlethe</option>
             <option value="regular">regular</option>
             <option value="honorary">honorary</option>
@@ -50,6 +50,10 @@
         <button type="submit" name="register">register</button>
     </form>
 
+	<script>document.getElementById('section_athlete').style.display = 'none';
+            	document.getElementById('section_honorary').style.display = 'none';
+            	document.getElementById('section_regular').style.display = 'none';</script>
+
     <br>
     <form action="login.html">
         <button type="submit">alredy registered? LogIn</button>
@@ -58,17 +62,25 @@
     <script>
         function toggleFields() {
             const type = document.getElementById('type_selector').value;
-            
-            document.getElementById('section_athlete').style.display = 'none';
-            document.getElementById('section_honorary').style.display = 'none';
-            document.getElementById('section_regular').style.display = 'none';
 
+            if (type === 'selection'){
+				document.getElementById('section_athlete').style.display = 'none';
+            	document.getElementById('section_honorary').style.display = 'none';
+            	document.getElementById('section_regular').style.display = 'none';
+			}
+            
             if (type === 'athlete') {
                 document.getElementById('section_athlete').style.display = 'block';
+            	document.getElementById('section_honorary').style.display = 'none';
+            	document.getElementById('section_regular').style.display = 'none';
             } else if (type === 'honorary') {
-                document.getElementById('section_honorary').style.display = 'block';
+                document.getElementById('section_athlete').style.display = 'none';
+            	document.getElementById('section_honorary').style.display = 'block';
+            	document.getElementById('section_regular').style.display = 'none';
             } else if (type === 'regular') {
-                document.getElementById('section_regular').style.display = 'block';
+                document.getElementById('section_athlete').style.display = 'none';
+            	document.getElementById('section_honorary').style.display = 'none';
+            	document.getElementById('section_regular').style.display = 'block';
             }
         }
     </script>

@@ -34,6 +34,7 @@ $corsi = $conn->query("SELECT * FROM courses")->fetchAll(PDO::FETCH_ASSOC);
     <title>Area Riservata - <?php echo $socio['name']; ?></title>
 </head>
 <body>
+    
     <h1>Benvenuto <?php echo $socio['name'] . " " . $socio['surname']; ?></h1>
     <p>Tipo Socio: <strong><?php echo strtoupper($socio['type']); ?></strong> | Tessera: <?php echo $socio['badge_number']; ?></p>
     

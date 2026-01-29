@@ -3,7 +3,7 @@
     require_once(__DIR__."/connect.php");
 
     if(isset($_SESSION['session_id'])){
-        header('Location: php/index.php');
+        header('Location: index.php');
         exit;
     }
     
@@ -31,7 +31,7 @@
                 $_SESSION['session_user'] = $user['username'];
                 $_SESSION['badge_number'] = $user['badge_number'];
 
-                header('Location: php/mainPage.php');
+                header('Location: mainPage.php');
                 exit;
             }else{
                 echo "password or username incorrect";
