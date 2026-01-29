@@ -4,12 +4,12 @@
     $db = "tutti_in_forma";
     $user = "root";
     $password = "";
-    //$port = 3306;
+    $port = 3307;
 
     $dns = "mysql:host=$host;dbname=$db;charset=UTF8";
 
     try{
-        $conn = new PDO($dns, $user, $password);
+        $conn = new PDO($dns, $user, $password, $port);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch(PDOException $e){
         die("Errore di connessione: " . $e->getMessage());

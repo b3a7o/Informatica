@@ -1,16 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register</title>
-    </head>
-    <body>
-        <form method="post" action="php/register.php">
-            <h1>REGISTER</h1>
-            <input type="text" id="username" placeholder="Username" name="username" maxlength="50" required>
-            <input type="text" id="password" placeholder="Password" name="password" maxlength="20" required>
-            <button type="submit" name="register">Register</button>
-        </form>
-    </body>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrer</title>
+</head>
+<body>
+    <h1>subsciption form</h1><hr>
+
+    <form method="post" action="php/register.php">
+        <h3>credenzial</h3>
+        <input type="text" name="username" placeholder="Username" maxlength="20" required>
+        <input type="password" name="password" placeholder="Password (min 8 car.)" minlength="8" required>
+
+        <h3>personal daa</h3>
+        <input type="number" name="badge_number" placeholder="Numero Tessera" required>
+        <br><br>
+        <input type="text" name="name" placeholder="Nome" required>
+        <input type="text" name="surname" placeholder="Cognome" required>
+        <br><br>
+        <input type="text" name="address" placeholder="Indirizzo">
+        <label for="birth_date">Data di Nascita:</label>
+        <input type="date" name="birth_date" id="birth_date">
+        <br><br>
+        <input type="text" name="occupation" placeholder="Professione">
+
+        <h3>type</h3>
+        <select name="type" id="type_selector" onchange="toggleFields()" required>
+            <option value="">-- Seleziona Tipo --</option>
+            <option value="athlete">Atlethe</option>
+            <option value="regular">regular</option>
+            <option value="honorary">honorary</option>
+        </select>
+
+        <div id="section_athlete">
+            <h4>atlehe data</h4>
+            <label>last medical visit:</label>
+            <input type="date" name="last_medical">
+            <br><br>
+            <label>federal badge date:</label>
+            <input type="date" name="federal_date">
+        </div>
+
+        <div id="section_honorary">
+            <h4>honorary </h4>
+            <input type="text" name="role" placeholder="Role">
+        </div>
+        <br><hr>
+        <button type="submit" name="register">register</button>
+    </form>
+
+    <br>
+    <form action="login.html">
+        <button type="submit">alredy registered? LogIn</button>
+    </form>
+
+    <script>
+        function toggleFields() {
+            const type = document.getElementById('type_selector').value;
+            
+            document.getElementById('section_athlete').style.display = 'none';
+            document.getElementById('section_honorary').style.display = 'none';
+            document.getElementById('section_regular').style.display = 'none';
+
+            if (type === 'athlete') {
+                document.getElementById('section_athlete').style.display = 'block';
+            } else if (type === 'honorary') {
+                document.getElementById('section_honorary').style.display = 'block';
+            } else if (type === 'regular') {
+                document.getElementById('section_regular').style.display = 'block';
+            }
+        }
+    </script>
+</body>
 </html>

@@ -1,10 +1,17 @@
 <?php
 require_once(__DIR__.'/connect.php');
-$red = false;
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
+    $badge_number = $_POST['badge_number'] ?? '';
+    $name = $_POST['name'] ?? '';
+    $surname = $_POST['surname'] ?? '';
+    $address = $_POST['address'] ?? '';
+    $birth_date = $_POST['birth_date'] ?? '';
+    $occupation = $_POST['occupation'] ?? '';
+    $type = $_POST['type'] ?? '';
+
     $isUsernameValid = filter_var(
         $username,
         FILTER_VALIDATE_REGEXP, [
@@ -16,17 +23,76 @@ if (isset($_POST['register'])) {
     $pwdLenght = mb_strlen($password);
     
     if (empty($username) || empty($password)) {
-        $msg = 'fill all the required %s';
-        $red = true;
-    } elseif (false === $isUsernameValid) {
-        $msg = 'invalid Username only alphanumeric characters and underscores';
-        $red = true;
+        header('Location: ../register.html');
+        exit;
+    } elseif (!$isUsernameValid) {
+        header('Location: ../register.html');
+        exit;
     } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-        $msg = 'min 8 character.';
-        $red = true;
-    } else {
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        header('Location: ../register.html');
+        exit;
+    }
 
+    try{
+        conn->beginTransaction(); //serve perchè se qualcosa da errore, non si salva quello fatto prima
+        $check = $conn->prepare(
+            "SELECT username 
+            FROM users WHERE 
+            username = ? OR badge_number = ?"
+        );
+        $check->execute([$username, $badge_number]);
+        if ($check->rowCount() > 0) {
+            throw new Exception("username or badge alredy being used.");
+        }
+
+        //members
+        $membersQuery = "INSERT INTO members (badge_number, name, surname, address, birth_date, occupation, type) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmtMembers = $conn->prepare($membersQuery);
+        $stmtMembers->execute([$badge_number, $name, $surname, $address, $birth_date, $occupation, $type]);
+        
+        //tipo di atleta
+        if ($type === 'athlete') {
+            $last_med = $_POST['last_medical'] ?? null;
+            $fed_date = $_POST['federal_date'] ?? null;
+            $stmtAthlete = $conn->prepare("INSERT INTO athletes (badge_number, last_medical_certificate, federal_badge_date, is_individual) VALUES (?, ?, ?, 1)");
+            $stmtAthlete->execute([$badge_number, $last_med, $fed_date]);
+        } 
+        
+        elseif ($type === 'regular') {
+            $stmtRegular = $conn->prepare("INSERT INTO regulars (badge_number, courses_number_last_5_years) VALUES (?, 0)");
+            $stmtRegular->execute([$badge_number]);
+        } 
+        
+        elseif ($type === 'honorary') {
+            $role = $_POST['role'] ?? 'Membro Onorario';
+            $stmtHonorary = $conn->prepare("INSERT INTO honorary (badge_number, role) VALUES (?, ?)");
+            $stmtHonorary->execute([$badge_number, $role]);
+        }
+        
+        
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        
+        $stmtUser = $conn->prepare("INSERT INTO users (username, password, badge_number) VALUES (?, ?, ?)");
+        
+        $stmtUser->execute([$username, $password_hash, $badge_number]);
+        $conn->commit();
+        
+        echo "REGISTERED SUCCESFULLY";
+        echo "wellcome $username";
+        echo "<form action='../login.html'><button type='submit'>login</button></form>";
+    }catch(Exception $e){
+        $conn->rollback();
+        $msg = "Errore : " . $e->getMessage();
+        header('Location: ../register.html');
+        exit;
+    }
+
+
+
+/*
+
+
+PROVA INIZIALE 
         $query = "
             SELECT id
             FROM users
@@ -67,4 +133,7 @@ if (isset($_POST['register'])) {
         header(__DIR__."register.php");
     }   
     echo("<form action='../login.html'><button type='submit'>login</button></form>");
+
+*/
 }
+?>      

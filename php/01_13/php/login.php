@@ -12,7 +12,7 @@
         $password = $_POST['password'] ?? '';
 
         if(empty($username) || empty($password)){
-            $msg = "Ypu must every camp in order to login";
+            echo "Ypu must fill every camp in order to login";
         }else{
             $query = "
                 SELECT username, password
@@ -25,18 +25,18 @@
 
             $user = $check->fetch(PDO::FETCH_ASSOC);
 
-            if(!$user || password_verify($password, $user['password'])){
-                $msg = "password or username incorrect";
-            }else{
+            if($user && password_verify($password, $user['password'])){
                 session_regenerate_id();
                 $_SESSION['session_id'] = session_id();
                 $_SESSION['session_user'] = $user['username'];
+                $_SESSION['badge_number'] = $user['badge_number'];
 
-                header('Location: php/index.php');
+                header('Location: php/mainPage.php');
                 exit;
+            }else{
+                echo "password or username incorrect";
+                echo "<form action='../login.html'><button type='submit'>Go Back</button></form>";
             }
         }
-        print($msg);
-        echo("<form action='login.html'><button type='submit'>Go Back</button></form>");
     }
 ?>

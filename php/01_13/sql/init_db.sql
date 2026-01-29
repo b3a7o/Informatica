@@ -10,8 +10,6 @@ CREATE TABLE members (
     birth_date DATE,
     occupation VARCHAR(50),
     type ENUM('athlete','regular','honorary') NOT NULL
-    username varchar(63),
-    password char(72)
 );  
 
 
@@ -123,9 +121,10 @@ CREATE TABLE athlete_teams (
 );
 
 -- Users
-create table users(
-    id int AUTO_INCREMENT not null primary key,
-    username varchar(20) not null,
-    password varchar(255) not null,
-    UNIQUE KEY username (username)
-)
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    badge_number INT,
+    FOREIGN KEY (badge_number) REFERENCES members(badge_number)
+);
