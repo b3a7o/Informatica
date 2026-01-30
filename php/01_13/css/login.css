@@ -1,4 +1,4 @@
-/* Basic Reset */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,7 +15,6 @@ body {
     flex-direction: column;
 }
 
-/* Container styling */
 body > form, .login-container {
     background: white;
     padding: 2rem;
@@ -33,7 +32,6 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* Input Fields */
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -49,7 +47,6 @@ input:focus {
     border-color: #9face6;
 }
 
-/* Buttons */
 button {
     width: 100%;
     padding: 12px;
@@ -66,14 +63,12 @@ button:hover {
     background-color: #5750d8;
 }
 
-/* Register Section */
 p {
     margin-top: 20px;
     color: #555;
     font-size: 0.9rem;
 }
 
-/* Secondary button (Register) */
 form[action="register.html"] button {
     background-color: transparent;
     color: #6c63ff;

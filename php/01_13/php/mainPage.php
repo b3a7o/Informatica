@@ -28,9 +28,11 @@ $corsi = $conn->query("SELECT * FROM courses")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <title>reserved area - <?php echo $socio['name']; ?></title>
+    <style><?php include_once("../css/mainPage.css"); ?></style>
+        
 </head>
 <body>
     

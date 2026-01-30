@@ -1,0 +1,129 @@
+  
+
+    :root {
+        --primary: #6366f1;
+        --primary-hover: #4f46e5;
+        --bg-gradient: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+        --card-bg: #ffffff;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+        background: var(--bg-gradient);
+        min-height: 100vh;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--card-bg);
+    }
+
+    
+    .container {
+        background: var(--card-bg);
+        color: var(--text-main);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 900px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: #0f172a;
+    }
+
+    h2 {
+        margin: 2rem 0 1rem;
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    p {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid var(--border);
+        margin: 1.5rem 0;
+    }
+
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th {
+        text-align: left;
+        background-color: #f8fafc;
+        color: var(--text-muted);
+        font-weight: 600;
+        padding: 12px 15px;
+        border-bottom: 2px solid var(--border);
+    }
+
+    td {
+        padding: 15px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-main);
+    }
+
+    tr:hover {
+        background-color: #f1f5f9;
+    }
+
+    
+    button {
+        background-color: var(--primary);
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    button:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    
+    a {
+        display: inline-block;
+        margin-top: 2rem;
+        color: #ef4444;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+    }
+
+    
+    strong {
+        color: var(--primary);
+    }
+
