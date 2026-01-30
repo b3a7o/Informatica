@@ -1,0 +1,143 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Main Form Container */
+form {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 500px; /* Increased width for double-input rows */
+    border: 1px solid #eee;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #2d3436;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 1.5rem 0;
+}
+
+/* Section Headings */
+h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #6c63ff;
+    letter-spacing: 1.5px;
+    margin: 1.5rem 0 1rem 0;
+    border-left: 4px solid #6c63ff;
+    padding-left: 10px;
+}
+
+h4 {
+    font-size: 0.85rem;
+    color: #636e72;
+    margin-bottom: 10px;
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: 2px solid #f1f1f1;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #6c63ff;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 5px;
+}
+
+/* Buttons */
+button[name="register"] {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #6c63ff;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    margin-top: 10px;
+}
+
+button[name="register"]:hover {
+    background: #5750d8;
+    transform: translateY(-2px);
+}
+
+button[name="register"]:active {
+    transform: translateY(0);
+}
+
+/* Secondary Login Button */
+form[action="login.html"] {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+form[action="login.html"] button {
+    background: transparent;
+    color: #636e72;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+}
+
+form[action="login.html"] button:hover {
+    color: #6c63ff;
+}
+
+/* Special styling for dynamic sections */
+#section_athlete, #section_honorary, #section_regular {
+    background: #f8f9ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px dashed #d1d1f9;
+}

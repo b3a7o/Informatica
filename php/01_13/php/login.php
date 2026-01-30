@@ -15,7 +15,7 @@
             echo "Ypu must fill every camp in order to login";
         }else{
             $query = "
-                SELECT username, password
+                SELECT username, password, badge_number
                 FROM users
                 WHERE username = :username
             ";

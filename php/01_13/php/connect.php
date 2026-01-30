@@ -1,12 +1,11 @@
--- Active: 1764659229914@@127.0.0.1@3306@tutti_in_forma
 <?php 
     $host = "127.0.0.1";
     $db = "tutti_in_forma";
     $user = "root";
     $password = "";
-    $port = 3307;
+    //$port = 3307;
 
-    $dns = "mysql:host=$host;port=$port;dbname=$db;charset=UTF8";
+    $dns = "mysql:host=$host;dbname=$db;charset=UTF8"; //port after host (3307 in case default 3306 is being used)
 
     try{
         $conn = new PDO($dns, $user, $password);

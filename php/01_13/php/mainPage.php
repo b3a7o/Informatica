@@ -11,17 +11,16 @@ $badge = $_SESSION['badge_number'];
 
 $stmtSocio = $conn->prepare("SELECT * FROM members WHERE badge_number = ?");
 $stmtSocio->execute([$badge]);
-$socio = $stmtSocio->fetch();
-
+$socio = $stmtSocio->fetch(PDO::FETCH_ASSOC);
 
 if (isset($_POST['join_course'])) {
     $course_code = $_POST['course_code'];
     try {
         $ins = $conn->prepare("INSERT INTO course_attendance (badge_number, course_code, payment_date) VALUES (?, ?, CURDATE())");
         $ins->execute([$badge, $course_code]);
-        echo "<script>alert('Iscrizione completata!');</script>";
+        echo "<script>alert('subscibed succesfully!');</script>";
     } catch (Exception $e) {
-        echo "Errore: Sei già iscritto o limite raggiunto.";
+        echo "Error: alredy subscibed or max subscription limit reached.";
     }
 }
 
@@ -31,23 +30,23 @@ $corsi = $conn->query("SELECT * FROM courses")->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Area Riservata - <?php echo $socio['name']; ?></title>
+    <title>reserved area - <?php echo $socio['name']; ?></title>
 </head>
 <body>
     
-    <h1>Benvenuto <?php echo $socio['name'] . " " . $socio['surname']; ?></h1>
-    <p>Tipo Socio: <strong><?php echo strtoupper($socio['type']); ?></strong> | Tessera: <?php echo $socio['badge_number']; ?></p>
+    <h1>Welcome <?php echo $socio['name'] . " " . $socio['surname']; ?></h1>
+    <p>type: <strong><?php echo strtoupper($socio['type']); ?></strong> | badge: <?php echo $socio['badge_number']; ?></p>
     
     <hr>
     
-    <h2>Corsi Disponibili</h2>
+    <h2>Available courses</h2>
     <table>
         <tr>
-            <th>Codice</th>
-            <th>Descrizione</th>
-            <th>Prezzo</th>
-            <th>Giorni</th>
-            <th>Azione</th>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Days</th>
+            <th>Action</th>
         </tr>
         <?php foreach($corsi as $c): ?>
         <tr>
@@ -58,7 +57,7 @@ $corsi = $conn->query("SELECT * FROM courses")->fetchAll(PDO::FETCH_ASSOC);
             <td>
                 <form method="post">
                     <input type="hidden" name="course_code" value="<?php echo $c['course_code']; ?>">
-                    <button type="submit" name="join_course">Iscriviti</button>
+                    <button type="submit" name="join_course">Subscibe</button>
                 </form>
             </td>
         </tr>

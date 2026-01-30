@@ -34,7 +34,7 @@ if (isset($_POST['register'])) {
     }
 
     try{
-        $conn->beginTransaction(); //serve perchè se qualcosa da errore, non si salva quello fatto prima
+        $conn->beginTransaction(); //serve perchè se qualcosa da errore, faccio rollback
         $check = $conn->prepare(
             "SELECT username 
             FROM users WHERE 
